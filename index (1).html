@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>我的瘦身流程</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700;900&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#EEEBE3; --bg-2:#E5E1D7; --surface:#FAF8F2; --surface-soft:#F4F1E9;
+    --ink:#23302A; --muted:#797E73;
+    --line:rgba(35,48,42,.09); --line-strong:rgba(35,48,42,.16);
+    --amber:#B4842F; --tang:#BC5A41; --green:#547E5E; --calm:#4C6E8E; --gold:#9C7B3E;
+    --shadow:0 1px 1px rgba(35,48,42,.03),0 6px 16px rgba(35,48,42,.05),0 20px 44px rgba(35,48,42,.055);
+    --radius:18px;
+    --font-cjk:"Noto Sans TC",system-ui,sans-serif;
+    --font-serif:"Noto Serif TC",serif;
+    --font-display:"Fraunces","Noto Serif TC",serif;
+    --font-num:"Space Grotesk","Noto Sans TC",system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{font-family:var(--font-cjk);color:var(--ink);background:var(--bg);line-height:1.6;
+    padding-bottom:calc(140px + env(safe-area-inset-bottom));-webkit-font-smoothing:antialiased}
+  .wrap{max-width:640px;margin:0 auto;padding:22px 18px 40px}
+
+  header{margin:8px 0 26px}
+  .eyebrow{font-family:var(--font-num);font-weight:500;font-size:12px;letter-spacing:.22em;
+    text-transform:uppercase;color:var(--muted);display:flex;gap:10px;align-items:center}
+  .eyebrow::after{content:"";height:1px;flex:1;background:var(--line-strong)}
+  h1{font-size:clamp(30px,8vw,42px);font-weight:900;letter-spacing:-.01em;margin:10px 0 4px;line-height:1.1}
+  .sub{color:var(--muted);font-size:14.5px}
+  .progress-card{margin-top:20px;background:var(--surface);border-radius:16px;padding:16px 18px;
+    box-shadow:var(--shadow);display:flex;flex-direction:column;gap:10px}
+  .progress-top{display:flex;justify-content:space-between;align-items:baseline}
+  .progress-top .pct{font-family:var(--font-num);font-weight:700;font-size:26px;font-variant-numeric:tabular-nums}
+  .progress-top .count{color:var(--muted);font-size:13px}
+  .bar{height:9px;border-radius:99px;background:#E4EAE4;overflow:hidden}
+  .bar>i{display:block;height:100%;width:0;border-radius:99px;
+    background:linear-gradient(90deg,var(--amber),var(--tang) 40%,var(--green) 70%,var(--calm));
+    transition:width .5s cubic-bezier(.4,0,.2,1)}
+  .reset-all{align-self:flex-start;margin-top:2px;background:none;border:none;cursor:pointer;
+    color:var(--muted);font-family:var(--font-cjk);font-size:13px;padding:2px 0;
+    border-bottom:1px dashed var(--line-strong)}
+  .reset-all:hover{color:var(--ink)}
+
+  .phase{background:var(--surface);border-radius:20px;box-shadow:var(--shadow);
+    margin-bottom:20px;overflow:hidden;border:1px solid var(--line)}
+  .phase-head{display:flex;align-items:center;gap:14px;padding:18px 20px 14px}
+  .num{font-family:var(--font-num);font-weight:700;font-size:15px;width:40px;height:40px;flex:none;
+    border-radius:12px;display:grid;place-items:center;color:#fff;background:var(--pc)}
+  .phase-titles{flex:1;min-width:0}
+  .phase-titles .tag{font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+    font-family:var(--font-num);font-weight:500;color:var(--pc)}
+  .phase-titles h2{font-size:21px;font-weight:900;letter-spacing:-.01em;line-height:1.2}
+  .phase-meta{font-size:12.5px;color:var(--muted);text-align:right;line-height:1.4;flex:none}
+  .phase-body{padding:4px 14px 16px}
+
+  .video-frame{position:relative;aspect-ratio:16/9;border-radius:14px;overflow:hidden;
+    background:#0d1f1a;margin:6px 6px 12px;width:calc(100% - 12px)}
+  .video-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .video-actions{display:flex;gap:10px;flex-wrap:wrap;padding:0 6px 4px}
+  .btn-yt{display:inline-flex;align-items:center;gap:8px;text-decoration:none;background:var(--ink);
+    color:#fff;font-weight:700;font-size:14px;padding:11px 16px;border-radius:12px}
+  .btn-yt:hover{opacity:.9}.btn-yt svg{width:18px;height:18px}
+
+  ul{list-style:none}
+  .ex{border-radius:14px}
+  .ex + .ex{border-top:1px solid var(--line)}
+  .ex-row{display:flex;align-items:center;gap:12px;padding:13px 8px}
+  .ex.done .ex-name{text-decoration:line-through}
+  .ex.done .ex-row{opacity:.5}
+  .check{width:26px;height:26px;flex:none;border-radius:9px;border:2px solid var(--line-strong);
+    background:none;cursor:pointer;display:grid;place-items:center;transition:.15s;padding:0}
+  .check svg{width:15px;height:15px;stroke:#fff;stroke-width:3.2;fill:none;stroke-linecap:round;
+    stroke-linejoin:round;opacity:0;transform:scale(.5);transition:.15s}
+  .ex.done .check{background:var(--pc);border-color:var(--pc)}
+  .ex.done .check svg{opacity:1;transform:scale(1)}
+  .ex-main{flex:1;min-width:0;text-align:left;background:none;border:none;cursor:pointer;
+    font-family:var(--font-cjk);color:var(--ink);padding:0;display:flex;align-items:center;gap:8px}
+  .ex-txt{min-width:0}
+  .ex-name{font-weight:700;font-size:15.5px;line-height:1.3}
+  .ex-cue{font-size:12.5px;color:var(--muted);margin-top:1px}
+  .chev{flex:none;width:16px;height:16px;color:var(--muted);transition:transform .25s}
+  .ex.open .chev{transform:rotate(180deg)}
+  .ex-val{font-family:var(--font-num);font-weight:700;font-size:15px;flex:none;color:var(--ink);
+    font-variant-numeric:tabular-nums;text-align:right;min-width:52px}
+  .ex-val small{display:block;font-family:var(--font-cjk);font-weight:400;font-size:10.5px;color:var(--muted)}
+  .time-btn{flex:none;border:1.5px solid var(--pc);color:var(--pc);background:none;cursor:pointer;
+    font-family:var(--font-cjk);font-weight:700;font-size:12.5px;padding:8px 12px;border-radius:10px;
+    white-space:nowrap;transition:.15s}
+  .time-btn:hover,.time-btn.active{background:var(--pc);color:#fff}
+
+  .ex-demo{display:none;padding:0 8px 16px;animation:fade .25s ease}
+  .ex.open .ex-demo{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+  .anim{height:150px;border-radius:14px;display:grid;place-items:center;margin-bottom:12px;
+    background:color-mix(in srgb,var(--pc) 9%,#fff);overflow:hidden}
+  .anim svg{height:138px;width:auto;max-width:96%;overflow:visible}
+  .anim .limb{stroke:var(--pc);stroke-width:9;fill:none;stroke-linecap:round;stroke-linejoin:round}
+  .anim .torso{stroke:var(--pc);stroke-width:21;fill:none;stroke-linecap:round;stroke-linejoin:round}
+  .anim .head{fill:var(--pc);stroke:none}
+  .anim .joint{fill:var(--pc);stroke:none}
+  .anim .floor{stroke:rgba(23,48,42,.14);stroke-width:3;stroke-linecap:round}
+  .anim .shadow{fill:rgba(23,48,42,.07)}
+  .anim .prop{fill:rgba(23,48,42,.10)}
+  .anim .propline{stroke:rgba(23,48,42,.26);stroke-width:4;stroke-linecap:round}
+  .anim .bottle{fill:var(--pc);opacity:.9}
+
+  .steps{margin:0 4px;padding-left:0;counter-reset:s}
+  .steps li{list-style:none;position:relative;padding:5px 0 5px 30px;font-size:14px;line-height:1.55}
+  .steps li::before{counter-increment:s;content:counter(s);position:absolute;left:0;top:5px;
+    width:21px;height:21px;border-radius:7px;background:var(--pc);color:#fff;font-family:var(--font-num);
+    font-weight:700;font-size:12px;display:grid;place-items:center}
+  .tip{margin:10px 4px 0;font-size:12.5px;color:var(--ink);background:color-mix(in srgb,var(--pc) 10%,#fff);
+    border-radius:11px;padding:9px 12px}.tip b{color:var(--pc)}
+  .note{margin:2px 8px 8px;font-size:12.5px;color:var(--muted);background:rgba(23,48,42,.035);
+    border-radius:11px;padding:10px 13px}.note b{color:var(--ink)}
+
+  /* keyframes */
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+  @keyframes breathe{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}
+  @keyframes cobra{0%,100%{transform:rotate(0)}50%{transform:rotate(-6deg)}}
+  @keyframes crunchUp{0%,100%{transform:rotate(0)}50%{transform:rotate(22deg)}}
+  @keyframes revCurl{0%,100%{transform:rotate(0) translateY(0)}50%{transform:rotate(-26deg) translateY(-4px)}}
+  @keyframes pedalA{0%,100%{transform:rotate(-6deg)}50%{transform:rotate(-40deg)}}
+  @keyframes pedalB{0%,100%{transform:rotate(-40deg)}50%{transform:rotate(-6deg)}}
+  @keyframes climbA{0%,100%{transform:rotate(0)}50%{transform:rotate(-42deg)}}
+  @keyframes climbB{0%,100%{transform:rotate(-42deg)}50%{transform:rotate(0)}}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  @keyframes dip{0%,100%{transform:translateY(0)}50%{transform:translateY(11px)}}
+  @keyframes pushDown{0%,100%{transform:rotate(0)}50%{transform:rotate(-7deg)}}
+  @keyframes ohBend{0%,100%{transform:rotate(0)}50%{transform:rotate(70deg)}}
+  @keyframes ohBendR{0%,100%{transform:rotate(0)}50%{transform:rotate(-70deg)}}
+  @keyframes raiseArmL{0%,100%{transform:rotate(0)}50%{transform:rotate(55deg)}}
+  @keyframes raiseArmR{0%,100%{transform:rotate(0)}50%{transform:rotate(-55deg)}}
+  .a-bob{animation:bob 3s ease-in-out infinite}
+  .a-breathe{animation:breathe 3.6s ease-in-out infinite}
+  .a-cobra{animation:cobra 3.6s ease-in-out infinite}
+  .a-crunch{animation:crunchUp 2.2s ease-in-out infinite}
+  .a-rev{animation:revCurl 2.2s ease-in-out infinite}
+  .a-pedalA{animation:pedalA 1.5s ease-in-out infinite}
+  .a-pedalB{animation:pedalB 1.5s ease-in-out infinite}
+  .a-climbA{animation:climbA .85s ease-in-out infinite}
+  .a-climbB{animation:climbB .85s ease-in-out infinite}
+  .a-spin{animation:spin 4s linear infinite}
+  .a-dip{animation:dip 1.7s ease-in-out infinite}
+  .a-push{animation:pushDown 2.2s ease-in-out infinite}
+  .a-oh{animation:ohBend 2s ease-in-out infinite}
+  .a-ohR{animation:ohBendR 2s ease-in-out infinite}
+  .a-raiseL{animation:raiseArmL 2.2s ease-in-out infinite}
+  .a-raiseR{animation:raiseArmR 2.2s ease-in-out infinite}
+
+  /* 30-day plan */
+  .plan{background:var(--surface);border-radius:20px;box-shadow:var(--shadow);margin-bottom:20px;
+    overflow:hidden;border:1px solid var(--line)}
+  .plan-prog{margin-bottom:14px;display:flex;flex-direction:column;gap:9px}
+  .grid{display:grid;grid-template-columns:repeat(6,1fr);gap:7px}
+  .day{--dc:var(--muted);position:relative;aspect-ratio:1;border:1.5px solid var(--line);border-radius:12px;
+    background:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    gap:2px;padding:2px;font-family:var(--font-cjk);transition:.12s}
+  .day:hover{border-color:var(--dc)}
+  .day .dn{font-family:var(--font-num);font-weight:700;font-size:16px;color:var(--ink);line-height:1}
+  .day .dl{font-size:9.5px;color:var(--dc);font-weight:700;line-height:1}
+  .day::before{content:"";position:absolute;top:6px;left:6px;width:6px;height:6px;border-radius:50%;background:var(--dc)}
+  .day.sel{border-color:var(--dc);border-width:2px}
+  .day.today{box-shadow:0 0 0 2.5px color-mix(in srgb,var(--dc) 55%,#fff);border-color:var(--dc)}
+  .day.done{background:color-mix(in srgb,var(--dc) 13%,#fff);border-color:transparent}
+  .day.done .dn{color:var(--dc)}
+  .day.done::after{content:"✓";position:absolute;top:3px;right:6px;font-size:10px;color:var(--dc);font-weight:900}
+  .t-full{--dc:#2C4A3E}.t-core{--dc:var(--tang)}.t-arms{--dc:var(--green)}.t-recovery{--dc:var(--amber)}.t-rest{--dc:var(--muted)}
+  .day-detail{margin-top:14px;border-top:1px solid var(--line);padding-top:14px;display:none}
+  .day-detail.show{display:block;animation:fade .25s ease}
+  .dd-top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:9px}
+  .dd-day{font-family:var(--font-num);font-weight:700;color:var(--calm);font-size:13px;margin-right:8px}
+  .dd-title{font-weight:900;font-size:17px}
+  .pills{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+  .pill{font-size:12px;font-weight:700;color:var(--ink);background:var(--bg);border:1px solid var(--line);
+    border-radius:99px;padding:5px 11px}
+  .dd-note{font-size:13px;color:var(--muted);background:rgba(23,48,42,.04);border-radius:11px;padding:10px 13px}
+  @media (max-width:380px){.grid{grid-template-columns:repeat(5,1fr)}.day .dl{font-size:9px}}
+
+  .timer-dock{position:fixed;left:0;right:0;bottom:0;z-index:50;
+    padding:0 12px calc(12px + env(safe-area-inset-bottom));display:flex;justify-content:center;pointer-events:none}
+  .timer{pointer-events:auto;width:100%;max-width:616px;background:var(--surface);border:1px solid var(--line);
+    border-radius:20px 20px 0 0;box-shadow:0 -6px 30px rgba(23,48,42,.14);padding:14px 16px 16px;
+    display:flex;align-items:center;gap:16px}
+  .ring{position:relative;width:76px;height:76px;flex:none}
+  .ring svg{transform:rotate(-90deg);width:100%;height:100%}
+  .ring .track{fill:none;stroke:#E4EAE4;stroke-width:7}
+  .ring .fill{fill:none;stroke:var(--tt,var(--tang));stroke-width:7;stroke-linecap:round;
+    transition:stroke-dashoffset .25s linear,stroke .3s}
+  .ring .digits{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--font-num);
+    font-weight:700;font-size:20px;font-variant-numeric:tabular-nums}
+  .timer-mid{flex:1;min-width:0}
+  .timer-label{font-weight:700;font-size:14.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .timer-hint{font-size:12px;color:var(--muted);margin-top:1px}
+  .timer-ctrls{display:flex;gap:7px;margin-top:9px;flex-wrap:wrap}
+  .tc{border:1px solid var(--line-strong);background:none;color:var(--ink);cursor:pointer;
+    font-family:var(--font-cjk);font-weight:700;font-size:12.5px;padding:7px 11px;border-radius:9px;transition:.12s}
+  .tc:hover{background:var(--bg)}
+  .tc.primary{background:var(--tt,var(--tang));border-color:var(--tt,var(--tang));color:#fff}
+  .tc.primary:hover{filter:brightness(.95)}.tc:disabled{opacity:.4;cursor:default}
+  .timer.flash{animation:flash .5s ease 3}
+  @keyframes flash{50%{background:#EAFBF3}}
+
+  footer{margin-top:8px;font-size:12.5px;color:var(--muted);text-align:center;line-height:1.7}
+  footer .tips{background:var(--surface);border-radius:16px;box-shadow:var(--shadow);padding:16px 18px;
+    text-align:left;margin-bottom:16px}
+  footer .tips h3{font-size:14px;color:var(--ink);margin-bottom:6px;font-weight:900}
+  footer .tips p{margin:5px 0}footer .tips b{color:var(--ink)}
+  :focus-visible{outline:2.5px solid var(--tang);outline-offset:2px;border-radius:6px}
+
+  @media (max-width:400px){.phase-meta{display:none}.ex-row{gap:9px;padding:12px 4px}.time-btn{padding:8px 9px}}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+  /* ===== 質感 polish ===== */
+  body{background:radial-gradient(135% 95% at 50% -18%, #F6F3EC 0%, var(--bg) 50%, var(--bg-2) 100%);background-attachment:fixed}
+  body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.3;mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+  .wrap{max-width:600px;padding:26px 20px 40px}
+
+  h1{font-family:var(--font-serif);font-weight:700;letter-spacing:-.015em;font-size:clamp(33px,8.6vw,46px);margin:12px 0 6px}
+  .sub{font-size:14px;color:var(--muted)}
+  .eyebrow{font-family:var(--font-cjk);text-transform:none;letter-spacing:.14em;font-size:12px;font-weight:500;color:var(--gold)}
+  .eyebrow::after{background:linear-gradient(90deg,var(--line-strong),transparent)}
+
+  .progress-card{background:var(--surface);padding:18px 20px;border-radius:var(--radius)}
+  .phase,.plan{margin-bottom:22px;border-radius:var(--radius)}
+  .phase-head{padding:20px 22px 15px;gap:15px}
+  .num{background:transparent;color:var(--pc,#fff);border:1.5px solid color-mix(in srgb,var(--pc,transparent) 42%,transparent);
+    border-radius:50%;width:46px;height:46px;font-family:var(--font-display);font-weight:600;font-size:20px}
+  .phase-titles h2{font-family:var(--font-serif);font-weight:700;letter-spacing:-.01em;font-size:22px}
+  .phase-titles .tag{font-family:var(--font-display);font-style:italic;text-transform:none;letter-spacing:.01em;font-size:14px;font-weight:500}
+
+  .progress-top .pct{font-family:var(--font-display);font-weight:600;font-size:30px;letter-spacing:-.01em}
+  .bar{background:#E4DFD3;height:8px}
+  .reset-all{border-bottom:1px solid var(--line-strong)}
+
+  .dd-day{font-family:var(--font-display);font-style:italic;font-size:15px}
+  .dd-title{font-family:var(--font-serif);font-weight:700}
+  .day{border-radius:13px}
+  .day .dn{font-family:var(--font-display);font-weight:600;font-size:17px}
+  .pill{background:var(--surface-soft);border-radius:9px;font-weight:500;letter-spacing:.02em}
+  .note,.dd-note,.tip{background:var(--surface-soft)}
+  .time-btn{border-radius:11px;font-weight:600;letter-spacing:.02em}
+  .anim{background:color-mix(in srgb,var(--pc) 7%,var(--surface-soft))}
+
+  .timer{border-radius:22px 22px 0 0;box-shadow:0 -8px 44px rgba(35,48,42,.12);border-color:var(--line)}
+  .timer-label{font-family:var(--font-serif);font-weight:700}
+  .ring .track{stroke:#E4DFD3}
+  :focus-visible{outline-color:var(--green)}
+
+  @keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+  header{animation:rise .55s cubic-bezier(.2,.7,.2,1) both}
+  main>section{animation:rise .6s cubic-bezier(.2,.7,.2,1) both}
+  main>section:nth-child(1){animation-delay:.04s}
+  main>section:nth-child(2){animation-delay:.10s}
+  main>section:nth-child(3){animation-delay:.16s}
+  main>section:nth-child(4){animation-delay:.22s}
+  main>section:nth-child(5){animation-delay:.28s}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">跟著做 · 四個階段</div>
+    <h1>我的瘦身流程</h1>
+    <p class="sub" id="dateline">打開就開始，一個階段接一個做完它。</p>
+    <div class="progress-card">
+      <div class="progress-top"><span class="pct" id="pct">0%</span><span class="count" id="count">0 / 0 完成</span></div>
+      <div class="bar"><i id="barfill"></i></div>
+      <button class="reset-all" id="resetAll">重新開始這次</button>
+    </div>
+  </header>
+  <main id="phases"></main>
+  <footer>
+    <div class="tips">
+      <h3>小提醒</h3>
+      <p><b>看不確定的動作：</b>點動作名稱會展開循環動畫＋步驟，跟著比對姿勢。</p>
+      <p><b>關於「局部瘦」：</b>核心和手臂訓練會讓肌肉更緊實有線條，但脂肪是全身一起減的，靠整體活動量與飲食。這套的重點是<b>練緊實＋用有氧拉高整體消耗</b>。</p>
+      <p><b>會痛就停：</b>不憋氣、關節不硬撐痛，量力而為。</p>
+    </div>
+    進度只記錄這次，關掉重開會歸零 · 為你自己做的頁面
+  </footer>
+</div>
+
+<div class="timer-dock">
+  <div class="timer" id="timer" style="--tt:var(--tang)">
+    <div class="ring">
+      <svg viewBox="0 0 100 100"><circle class="track" cx="50" cy="50" r="44"></circle>
+        <circle class="fill" id="ringFill" cx="50" cy="50" r="44" stroke-dasharray="276.46" stroke-dashoffset="0"></circle></svg>
+      <div class="digits" id="digits">0:30</div>
+    </div>
+    <div class="timer-mid">
+      <div class="timer-label" id="tLabel">計時器待命中</div>
+      <div class="timer-hint" id="tHint">點任一個「計時」動作就開始</div>
+      <div class="timer-ctrls">
+        <button class="tc primary" id="tStart" disabled>開始</button>
+        <button class="tc" id="tReset" disabled>重設</button>
+        <button class="tc" id="tPlus" disabled>+10 秒</button>
+        <button class="tc" id="tRest">休息 30 秒</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const YT_ID="JrbOznI6F0I", YT_LIST="PLaSGQyzWPJoOqjJ1iLq_pubdrTXp_sUS8";
+
+const ANIM={
+ plank:`<svg viewBox="0 0 210 130" role="img" aria-label="棒式示範"><ellipse class="shadow" cx="118" cy="110" rx="70" ry="6"/><line class="floor" x1="24" y1="104" x2="196" y2="104"/><g class="a-bob"><line class="limb" x1="46" y1="100" x2="78" y2="100"/><line class="limb" x1="78" y1="100" x2="80" y2="66"/><line class="torso" x1="80" y1="66" x2="140" y2="86"/><line class="limb" x1="140" y1="86" x2="168" y2="96"/><line class="limb" x1="168" y1="96" x2="190" y2="102"/><circle class="head" cx="70" cy="58" r="11"/><circle class="joint" cx="46" cy="100" r="5"/><circle class="joint" cx="190" cy="102" r="5"/></g></svg>`,
+ crunch:`<svg viewBox="0 0 210 130" role="img" aria-label="捲腹示範"><ellipse class="shadow" cx="112" cy="112" rx="72" ry="6"/><line class="floor" x1="30" y1="106" x2="184" y2="106"/><line class="limb" x1="128" y1="100" x2="160" y2="74"/><line class="limb" x1="160" y1="74" x2="160" y2="104"/><circle class="joint" cx="160" cy="104" r="5"/><g class="a-crunch" style="transform-box:view-box;transform-origin:128px 100px"><line class="torso" x1="128" y1="100" x2="84" y2="100"/><circle class="head" cx="68" cy="96" r="11"/><line class="limb" x1="86" y1="100" x2="98" y2="88"/><line class="limb" x1="98" y1="88" x2="78" y2="90"/></g></svg>`,
+ reverse:`<svg viewBox="0 0 210 130" role="img" aria-label="反向捲腹示範"><ellipse class="shadow" cx="96" cy="112" rx="66" ry="6"/><line class="floor" x1="30" y1="106" x2="184" y2="106"/><line class="torso" x1="66" y1="102" x2="126" y2="102"/><circle class="head" cx="54" cy="98" r="11"/><g class="a-rev" style="transform-box:view-box;transform-origin:126px 102px"><line class="limb" x1="126" y1="102" x2="154" y2="74"/><line class="limb" x1="154" y1="74" x2="134" y2="52"/><circle class="joint" cx="154" cy="74" r="4"/><circle class="joint" cx="134" cy="52" r="5"/></g></svg>`,
+ bicycle:`<svg viewBox="0 0 210 130" role="img" aria-label="腳踏車捲腹示範"><ellipse class="shadow" cx="110" cy="116" rx="76" ry="6"/><line class="floor" x1="24" y1="112" x2="188" y2="112"/><circle class="head" cx="56" cy="74" r="11"/><line class="torso" x1="66" y1="82" x2="116" y2="96"/><line class="limb" x1="74" y1="84" x2="62" y2="72"/><g class="a-pedalA" style="transform-box:view-box;transform-origin:116px 96px"><line class="limb" x1="116" y1="96" x2="150" y2="86"/><line class="limb" x1="150" y1="86" x2="178" y2="92"/><circle class="joint" cx="150" cy="86" r="4"/></g><g class="a-pedalB" style="transform-box:view-box;transform-origin:116px 96px"><line class="limb" x1="116" y1="96" x2="140" y2="104"/><line class="limb" x1="140" y1="104" x2="152" y2="120"/><circle class="joint" cx="140" cy="104" r="4"/></g></svg>`,
+ sideplank:`<svg viewBox="0 0 210 130" role="img" aria-label="側棒式示範"><ellipse class="shadow" cx="112" cy="110" rx="70" ry="6"/><line class="floor" x1="30" y1="104" x2="192" y2="104"/><g class="a-bob"><line class="limb" x1="58" y1="100" x2="88" y2="100"/><line class="limb" x1="88" y1="100" x2="88" y2="62"/><line class="torso" x1="88" y1="62" x2="140" y2="84"/><line class="limb" x1="140" y1="84" x2="170" y2="100"/><line class="limb" x1="88" y1="62" x2="90" y2="28"/><circle class="head" cx="80" cy="56" r="11"/><circle class="joint" cx="58" cy="100" r="5"/><circle class="joint" cx="90" cy="28" r="5"/><circle class="joint" cx="170" cy="100" r="5"/></g></svg>`,
+ climber:`<svg viewBox="0 0 210 130" role="img" aria-label="登山者示範"><ellipse class="shadow" cx="120" cy="110" rx="74" ry="6"/><line class="floor" x1="30" y1="104" x2="192" y2="104"/><circle class="head" cx="66" cy="54" r="11"/><line class="limb" x1="58" y1="100" x2="66" y2="82"/><line class="limb" x1="66" y1="82" x2="74" y2="60"/><line class="torso" x1="74" y1="60" x2="140" y2="80"/><circle class="joint" cx="58" cy="100" r="5"/><g class="a-climbA" style="transform-box:view-box;transform-origin:140px 80px"><line class="limb" x1="140" y1="80" x2="168" y2="92"/><line class="limb" x1="168" y1="92" x2="188" y2="100"/><circle class="joint" cx="168" cy="92" r="4"/></g><g class="a-climbB" style="transform-box:view-box;transform-origin:140px 80px"><line class="limb" x1="140" y1="80" x2="120" y2="86"/><line class="limb" x1="120" y1="86" x2="110" y2="98"/><circle class="joint" cx="120" cy="86" r="4"/></g></svg>`,
+ armcircle:`<svg viewBox="0 0 170 178" role="img" aria-label="手臂繞環示範"><ellipse class="shadow" cx="85" cy="168" rx="34" ry="6"/><circle class="head" cx="85" cy="34" r="12"/><line class="torso" x1="85" y1="48" x2="85" y2="104"/><line class="limb" x1="85" y1="104" x2="72" y2="134"/><line class="limb" x1="72" y1="134" x2="70" y2="162"/><line class="limb" x1="85" y1="104" x2="98" y2="134"/><line class="limb" x1="98" y1="134" x2="100" y2="162"/><g class="a-spin" style="transform-box:view-box;transform-origin:85px 52px"><line class="limb" x1="85" y1="52" x2="60" y2="52"/><line class="limb" x1="60" y1="52" x2="40" y2="52"/><circle class="joint" cx="40" cy="52" r="6"/></g><g class="a-spin" style="transform-box:view-box;transform-origin:85px 52px"><line class="limb" x1="85" y1="52" x2="110" y2="52"/><line class="limb" x1="110" y1="52" x2="130" y2="52"/><circle class="joint" cx="130" cy="52" r="6"/></g></svg>`,
+ dip:`<svg viewBox="0 0 190 165" role="img" aria-label="三頭肌撐體示範"><line class="floor" x1="20" y1="140" x2="176" y2="140"/><rect class="prop" x="120" y="98" width="44" height="42" rx="4"/><line class="propline" x1="120" y1="98" x2="164" y2="98"/><g class="a-dip"><circle class="head" cx="112" cy="72" r="11"/><line class="torso" x1="108" y1="82" x2="100" y2="112"/><line class="limb" x1="108" y1="82" x2="128" y2="92"/><line class="limb" x1="128" y1="92" x2="130" y2="98"/><line class="limb" x1="100" y1="112" x2="66" y2="112"/><line class="limb" x1="66" y1="112" x2="64" y2="138"/><circle class="joint" cx="64" cy="138" r="5"/></g></svg>`,
+ kneepush:`<svg viewBox="0 0 210 130" role="img" aria-label="跪姿伏地挺身示範"><ellipse class="shadow" cx="104" cy="112" rx="76" ry="6"/><line class="floor" x1="24" y1="108" x2="188" y2="108"/><g class="a-push" style="transform-box:view-box;transform-origin:150px 104px"><line class="limb" x1="150" y1="104" x2="128" y2="90"/><line class="torso" x1="128" y1="90" x2="74" y2="98"/><line class="limb" x1="74" y1="98" x2="56" y2="106"/><circle class="head" cx="64" cy="90" r="11"/><circle class="joint" cx="56" cy="106" r="5"/></g><circle class="joint" cx="150" cy="104" r="6"/></svg>`,
+ overhead:`<svg viewBox="0 0 160 178" role="img" aria-label="過頭三頭伸展示範"><ellipse class="shadow" cx="80" cy="170" rx="34" ry="6"/><circle class="head" cx="80" cy="46" r="12"/><line class="torso" x1="80" y1="60" x2="80" y2="112"/><line class="limb" x1="80" y1="112" x2="68" y2="142"/><line class="limb" x1="68" y1="142" x2="66" y2="168"/><line class="limb" x1="80" y1="112" x2="92" y2="142"/><line class="limb" x1="92" y1="142" x2="94" y2="168"/><line class="limb" x1="80" y1="62" x2="70" y2="26"/><line class="limb" x1="80" y1="62" x2="90" y2="26"/><g class="a-oh" style="transform-box:view-box;transform-origin:70px 26px"><line class="limb" x1="70" y1="26" x2="70" y2="8"/><rect class="bottle" x="64" y="2" width="12" height="13" rx="3"/></g><g class="a-ohR" style="transform-box:view-box;transform-origin:90px 26px"><line class="limb" x1="90" y1="26" x2="90" y2="8"/></g><circle class="joint" cx="70" cy="26" r="4"/><circle class="joint" cx="90" cy="26" r="4"/></svg>`,
+ lateral:`<svg viewBox="0 0 180 178" role="img" aria-label="側平舉示範"><ellipse class="shadow" cx="90" cy="170" rx="36" ry="6"/><circle class="head" cx="90" cy="44" r="12"/><line class="torso" x1="90" y1="58" x2="90" y2="112"/><line class="limb" x1="90" y1="112" x2="76" y2="142"/><line class="limb" x1="76" y1="142" x2="74" y2="168"/><line class="limb" x1="90" y1="112" x2="104" y2="142"/><line class="limb" x1="104" y1="142" x2="106" y2="168"/><g class="a-raiseL" style="transform-box:view-box;transform-origin:90px 60px"><line class="limb" x1="90" y1="60" x2="66" y2="86"/><line class="limb" x1="66" y1="86" x2="58" y2="100"/><rect class="bottle" x="52" y="98" width="12" height="13" rx="3"/></g><g class="a-raiseR" style="transform-box:view-box;transform-origin:90px 60px"><line class="limb" x1="90" y1="60" x2="114" y2="86"/><line class="limb" x1="114" y1="86" x2="122" y2="100"/><rect class="bottle" x="116" y="98" width="12" height="13" rx="3"/></g></svg>`,
+ cobra:`<svg viewBox="0 0 220 130" role="img" aria-label="眼鏡蛇式示範"><ellipse class="shadow" cx="150" cy="112" rx="66" ry="6"/><line class="floor" x1="30" y1="108" x2="204" y2="108"/><line class="limb" x1="150" y1="102" x2="176" y2="104"/><line class="limb" x1="176" y1="104" x2="202" y2="104"/><g class="a-cobra" style="transform-box:view-box;transform-origin:150px 102px"><line class="torso" x1="150" y1="102" x2="98" y2="76"/><line class="limb" x1="98" y1="76" x2="94" y2="104"/><circle class="head" cx="86" cy="66" r="11"/><circle class="joint" cx="94" cy="104" r="5"/></g></svg>`,
+ child:`<svg viewBox="0 0 220 120" role="img" aria-label="嬰兒式示範"><ellipse class="shadow" cx="120" cy="104" rx="86" ry="6"/><line class="floor" x1="24" y1="100" x2="200" y2="100"/><line class="limb" x1="164" y1="92" x2="150" y2="96"/><line class="limb" x1="150" y1="96" x2="180" y2="96"/><g class="a-breathe"><line class="torso" x1="160" y1="90" x2="100" y2="88"/><line class="limb" x1="100" y1="88" x2="52" y2="94"/><circle class="head" cx="86" cy="90" r="10"/><circle class="joint" cx="52" cy="94" r="5"/></g></svg>`,
+ tricepstretch:`<svg viewBox="0 0 160 178" role="img" aria-label="三頭肌伸展示範"><ellipse class="shadow" cx="80" cy="170" rx="34" ry="6"/><g class="a-breathe"><circle class="head" cx="80" cy="48" r="12"/><line class="torso" x1="80" y1="62" x2="80" y2="114"/><line class="limb" x1="80" y1="66" x2="98" y2="30"/><line class="limb" x1="98" y1="30" x2="74" y2="44"/><line class="limb" x1="80" y1="66" x2="66" y2="46"/><line class="limb" x1="66" y1="46" x2="92" y2="32"/><circle class="joint" cx="98" cy="30" r="4"/></g><line class="limb" x1="80" y1="114" x2="68" y2="144"/><line class="limb" x1="68" y1="144" x2="66" y2="170"/><line class="limb" x1="80" y1="114" x2="92" y2="144"/><line class="limb" x1="92" y1="144" x2="94" y2="170"/></svg>`,
+ crossbody:`<svg viewBox="0 0 160 178" role="img" aria-label="跨身肩伸展示範"><ellipse class="shadow" cx="80" cy="170" rx="34" ry="6"/><g class="a-breathe"><circle class="head" cx="82" cy="46" r="12"/><line class="torso" x1="82" y1="60" x2="82" y2="112"/><line class="limb" x1="82" y1="66" x2="52" y2="72"/><line class="limb" x1="52" y1="72" x2="44" y2="74"/><line class="limb" x1="82" y1="66" x2="70" y2="94"/><line class="limb" x1="70" y1="94" x2="52" y2="76"/><circle class="joint" cx="44" cy="74" r="5"/></g><line class="limb" x1="82" y1="112" x2="70" y2="142"/><line class="limb" x1="70" y1="142" x2="68" y2="168"/><line class="limb" x1="82" y1="112" x2="94" y2="142"/><line class="limb" x1="94" y1="142" x2="96" y2="168"/></svg>`,
+ catcow:`<svg viewBox="0 0 210 130" role="img" aria-label="貓牛式示範"><ellipse class="shadow" cx="108" cy="112" rx="80" ry="6"/><line class="floor" x1="24" y1="108" x2="192" y2="108"/><line class="limb" x1="64" y1="104" x2="70" y2="76"/><line class="limb" x1="150" y1="104" x2="146" y2="78"/><circle class="joint" cx="64" cy="104" r="5"/><circle class="joint" cx="150" cy="104" r="5"/><path class="torso" d="M70,76 Q108,54 146,78"><animate attributeName="d" dur="4s" repeatCount="indefinite" values="M70,76 Q108,54 146,78;M70,76 Q108,98 146,78;M70,76 Q108,54 146,78"/></path><circle class="head" cx="56" cy="82" r="11"><animate attributeName="cy" dur="4s" repeatCount="indefinite" values="82;74;82"/></circle></svg>`
+};
+
+const data=[
+ {tag:"CARDIO",title:"有氧暖身",color:"var(--amber)",meta:"跟著影片<br>播完為止",video:true},
+ {tag:"CORE",title:"瘦腹 · 核心",color:"var(--tang)",meta:"約 8–10 分<br>6 個動作",exercises:[
+   {name:"棒式 Plank",cue:"從頭到腳跟一直線，撐住",time:40,anim:"plank",
+    steps:["手肘在肩膀正下方，前臂貼地","腳尖踩地，身體從頭到腳跟連成一直線","肚子收緊、微微夾臀，正常呼吸不憋氣"],
+    tip:"臀部別翹高、腰別下塌——撐不住就先縮短秒數"},
+   {name:"捲腹 Crunch",cue:"用腹部把上背捲起來",reps:20,anim:"crunch",
+    steps:["屈膝仰躺，腳掌踩地，雙手輕扶頭側","吐氣，用腹部把上背捲離地","停一下，吸氣慢慢躺回，下背始終貼地"],
+    tip:"別用手把頭往前拉，下巴和胸口間留一顆蛋的空間"},
+   {name:"反向捲腹 Reverse crunch",cue:"膝蓋往胸口捲，臀微離地",reps:15,anim:"reverse",
+    steps:["仰躺，雙腿抬起屈膝約 90 度","吐氣，用下腹把膝蓋往胸口捲、臀部微微離地","吸氣慢慢放回，不要用甩的"],
+    tip:"靠腹部不是靠腿甩；下背保持貼地"},
+   {name:"腳踏車捲腹 Bicycle",cue:"對側手肘找膝蓋，交替",reps:"15",unit:"左右各",anim:"bicycle",
+    steps:["仰躺手扶頭側，雙腳抬起","對側手肘找膝蓋，同時另一腿往前伸","左右交替，像踩腳踏車，保持節奏"],
+    tip:"扭的是軀幹不是脖子；伸出去的腳別碰地"},
+   {name:"側棒式 Side plank",cue:"身體側面連成一直線",time:30,unit:"左右各",anim:"sideplank",
+    steps:["側躺，手肘在肩膀正下方撐地","臀部抬起，身體側面連成一直線","收緊核心撐住，做完換邊再按一次"],
+    tip:"髖別往後掉；撐不穩可把下方膝蓋跪地降低難度"},
+   {name:"登山者 Mountain climber",cue:"膝蓋輪流快速往胸口帶",time:40,anim:"climber",
+    steps:["雙手撐地成高棒式，肩膀在手腕上方","核心收緊，膝蓋輪流快速往胸口帶","保持背部平穩，臀部別上下彈"],
+    tip:"重點是核心穩定不是速度；手腕會痛可放慢"},
+ ]},
+ {tag:"ARMS",title:"瘦手臂",color:"var(--green)",meta:"約 8 分<br>寶特瓶當輕啞鈴",
+  intro:"沒器材沒關係：拿兩瓶裝水的寶特瓶當輕啞鈴（約 500ml，太輕再加）。主打<b>三頭肌（掰掰袖）和肩膀線條</b>。",
+  exercises:[
+   {name:"手臂大繞環 Arm circles",cue:"手臂打直，以肩膀畫圓",time:30,unit:"前後各",anim:"armcircle",
+    steps:["站姿，雙臂側平舉伸直與肩同高","以肩膀為軸畫圓，維持手臂打直","做完一個方向，換反方向再按一次"],
+    tip:"肩膀放鬆別聳；圈小而穩比大而甩更有感"},
+   {name:"椅子三頭撐體 Tricep dip",cue:"手肘向後彎，身體下沉再推起",reps:12,anim:"dip",
+    steps:["背對穩固椅子／沙發，雙手撐在邊緣","臀部離開椅子，手肘向後彎讓身體下沉","三頭肌發力把身體推回，手肘別鎖死"],
+    tip:"手肘往正後方、別外開；肩膀下沉別聳到耳朵"},
+   {name:"跪姿伏地挺身 Knee push-up",cue:"膝蓋著地，胸口靠近地面",reps:10,anim:"kneepush",
+    steps:["雙手比肩略寬撐地，膝蓋著地","核心收緊，手肘彎曲讓胸口靠近地面","推地回到起點，身體維持一直線"],
+    tip:"屁股別翹高；手肘約 45 度、別完全外開"},
+   {name:"寶特瓶過頭三頭伸展",cue:"只彎手肘，把瓶子放到後腦後",reps:15,anim:"overhead",
+    steps:["雙手握寶特瓶高舉過頭，手肘朝前","只彎手肘，把瓶子放到後腦杓後方","三頭肌發力把手臂伸直回頂端"],
+    tip:"上臂夾住固定不動，動的只有小臂"},
+   {name:"寶特瓶側平舉 Lateral raise",cue:"往兩側抬到與肩同高",reps:15,anim:"lateral",
+    steps:["雙手各握一瓶自然垂在身側","手臂微彎，往兩側抬到與肩同高","停一下，慢慢放回，全程控制"],
+    tip:"用肩膀抬不是用甩的；抬到肩高就好、別超過"},
+ ]},
+ {tag:"COOL DOWN",title:"收操伸展",color:"var(--calm)",meta:"約 3–5 分<br>慢慢呼吸",
+  intro:"運動完別急著停。慢慢伸展 3–5 分鐘，放鬆剛才練到的核心和手臂。每個動作<b>慢慢呼吸、停 20–30 秒</b>，感覺伸展但不痛。",
+  exercises:[
+   {name:"眼鏡蛇式 Cobra",cue:"趴姿推起上身，伸展腹部前側",time:30,anim:"cobra",
+    steps:["趴姿，雙手放在胸口兩側、手肘收好","吸氣，用手輕推地板把胸口抬起","肩膀下沉遠離耳朵，腹部有伸展感就停住"],
+    tip:"腰不舒服就推低一點；別聳肩、脖子放鬆"},
+   {name:"貓牛式 Cat-cow",cue:"四足跪姿，脊椎拱起塌下",time:30,anim:"catcow",
+    steps:["四足跪姿，手在肩下、膝在髖下","吐氣拱背（貓），吸氣塌腰抬頭（牛）","跟著呼吸慢慢來回，脊椎放鬆"],
+    tip:"動作要慢、跟著呼吸；手腕不適可握拳撐地"},
+   {name:"嬰兒式 Child's pose",cue:"跪坐前趴，放鬆背部",time:30,anim:"child",
+    steps:["跪坐，膝蓋略開，臀部往腳跟坐","上半身往前趴下，額頭貼地或墊上","雙手往前延伸，深呼吸放鬆背部"],
+    tip:"膝蓋不適可在臀腿間夾個枕頭或毛巾"},
+   {name:"三頭肌伸展 Triceps",cue:"手彎過頭，另手輕帶手肘",time:20,unit:"左右各",anim:"tricepstretch",
+    steps:["一手彎起、手掌摸向上背","另一手輕扶手肘往內、往下帶","感覺後上臂伸展，停住呼吸，換邊"],
+    tip:"別用力壓到痛；上半身保持挺直"},
+   {name:"跨身肩伸展 Cross-body",cue:"手橫過胸前，另手往身體帶",time:20,unit:"左右各",anim:"crossbody",
+    steps:["一手橫過胸前伸直","另一手扶在上臂把它往身體帶","感覺肩膀後側伸展，停住，換邊"],
+    tip:"被拉的肩膀放鬆下沉，別聳起來"},
+ ]}
+];
+
+const phasesEl=document.getElementById('phases');
+let uid=0;
+data.forEach((p,pi)=>{
+  const card=document.createElement('section');
+  card.className='phase'; card.style.setProperty('--pc',p.color);
+  let html=`<div class="phase-head"><div class="num">${String(pi+1).padStart(2,'0')}</div>
+    <div class="phase-titles"><div class="tag">${p.tag}</div><h2>${p.title}</h2></div>
+    <div class="phase-meta">${p.meta}</div></div><div class="phase-body">`;
+
+  if(p.video){
+    html+=`<div class="video-frame"><iframe src="https://www.youtube.com/embed/${YT_ID}?list=${YT_LIST}"
+        title="有氧影片" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe></div>
+      <div class="video-actions"><a class="btn-yt" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=${YT_ID}&list=${YT_LIST}">
+        <svg viewBox="0 0 24 24" fill="#fff"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.5 15.5v-7l6.3 3.5z"/></svg>
+        在 YouTube 開啟播放清單</a></div>
+      <ul><li class="ex" data-id="v${uid++}"><div class="ex-row">
+        <button class="check" aria-label="標記完成"><svg viewBox="0 0 24 24"><polyline points="4 12 10 18 20 6"/></svg></button>
+        <div class="ex-main" style="cursor:default"><span class="ex-txt"><span class="ex-name">有氧做完了</span>
+          <span class="ex-cue">影片播完，或做到微微流汗、稍微喘</span></span></div>
+      </div></li></ul>`;
+  } else {
+    if(p.intro) html+=`<div class="note">${p.intro}</div>`;
+    html+='<ul>';
+    p.exercises.forEach(ex=>{
+      const id='e'+(uid++);
+      const right = ex.time
+        ? `<button class="time-btn" data-time="${ex.time}" data-label="${ex.name}">計時 ${ex.time}″</button>`
+        : `<div class="ex-val">${ex.reps}<small>${ex.unit||''} 下</small></div>`;
+      const stepsHtml = ex.steps.map(s=>`<li>${s}</li>`).join('');
+      html+=`<li class="ex" data-id="${id}">
+        <div class="ex-row">
+          <button class="check" aria-label="標記完成"><svg viewBox="0 0 24 24"><polyline points="4 12 10 18 20 6"/></svg></button>
+          <button class="ex-main" aria-expanded="false">
+            <span class="ex-txt"><span class="ex-name">${ex.name}</span><span class="ex-cue">${ex.cue}</span></span>
+            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          ${right}
+        </div>
+        <div class="ex-demo">
+          <div class="anim">${ANIM[ex.anim]||''}</div>
+          <ol class="steps">${stepsHtml}</ol>
+          <div class="tip"><b>重點</b> ${ex.tip}</div>
+        </div>
+      </li>`;
+    });
+    html+='</ul>';
+  }
+  html+='</div>';
+  card.innerHTML=html; phasesEl.appendChild(card);
+});
+
+document.querySelectorAll('.ex-main[aria-expanded]').forEach(btn=>{
+  btn.addEventListener('click',()=>{const li=btn.closest('.ex'),open=li.classList.toggle('open');btn.setAttribute('aria-expanded',open);});
+});
+
+const pct=document.getElementById('pct'),count=document.getElementById('count'),barfill=document.getElementById('barfill');
+function updateProgress(){
+  const rows=[...document.querySelectorAll('.ex')];
+  const done=rows.filter(r=>r.classList.contains('done')).length, total=rows.length;
+  const p=Math.round(done/total*100);
+  pct.textContent=p+'%'; count.textContent=`${done} / ${total} 完成`; barfill.style.width=p+'%';
+}
+document.querySelectorAll('.ex .check').forEach(c=>{
+  c.addEventListener('click',()=>{c.closest('.ex').classList.toggle('done');updateProgress();});
+});
+document.getElementById('resetAll').addEventListener('click',()=>{
+  document.querySelectorAll('.ex.done').forEach(e=>e.classList.remove('done'));updateProgress();
+});
+updateProgress();
+
+const d=new Date(),wk=['日','一','二','三','四','五','六'][d.getDay()];
+document.getElementById('dateline').textContent=`${d.getMonth()+1}月${d.getDate()}日 星期${wk} · 打開就開始，一段接一段做完它。`;
+
+const CIRC=2*Math.PI*44;
+const ringFill=document.getElementById('ringFill'),digits=document.getElementById('digits');
+const tLabel=document.getElementById('tLabel'),tHint=document.getElementById('tHint');
+const tStart=document.getElementById('tStart'),tReset=document.getElementById('tReset');
+const tPlus=document.getElementById('tPlus'),tRest=document.getElementById('tRest'),timerEl=document.getElementById('timer');
+ringFill.style.strokeDasharray=CIRC;
+let total=30,remain=30,running=false,ticker=null,activeBtn=null,curRow=null,isRest=false;
+const fmt=s=>`${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`;
+function paint(){digits.textContent=fmt(remain);ringFill.style.strokeDashoffset=CIRC*(1-(total>0?remain/total:0));}
+function setColor(v){timerEl.style.setProperty('--tt',v);}
+function loadTimer(sec,label,btn,row){
+  stop();isRest=false;total=sec;remain=sec;curRow=row||null;
+  tLabel.textContent=label;tHint.textContent='準備好就按開始';
+  if(activeBtn)activeBtn.classList.remove('active');activeBtn=btn||null;if(activeBtn)activeBtn.classList.add('active');
+  const pc=row?getComputedStyle(row.closest('.phase')).getPropertyValue('--pc'):'var(--tang)';
+  setColor((pc||'').trim()||'var(--tang)');
+  tStart.disabled=false;tReset.disabled=false;tPlus.disabled=false;tStart.textContent='開始';paint();
+}
+function tick(){remain--;paint();if(remain<=0)finish();}
+function start(){if(running||remain<=0)return;running=true;tStart.textContent='暫停';ticker=setInterval(tick,1000);}
+function pause(){running=false;tStart.textContent='繼續';clearInterval(ticker);}
+function stop(){running=false;clearInterval(ticker);}
+function finish(){
+  stop();remain=0;paint();tStart.textContent='完成 ✓';
+  timerEl.classList.remove('flash');void timerEl.offsetWidth;timerEl.classList.add('flash');beep();
+  if(curRow&&!isRest&&!curRow.classList.contains('done')){curRow.classList.add('done');updateProgress();}
+  tHint.textContent=isRest?'休息結束，繼續下一個！':'做完了！可以進下一個動作';
+}
+tStart.addEventListener('click',()=>{if(remain<=0){remain=total;paint();}running?pause():start();});
+tReset.addEventListener('click',()=>{stop();remain=total;tStart.textContent='開始';paint();tHint.textContent='準備好就按開始';});
+tPlus.addEventListener('click',()=>{remain+=10;total=Math.max(total,remain);paint();});
+tRest.addEventListener('click',()=>{loadTimer(30,'休息一下',null,null);isRest=true;setColor('var(--muted)');tLabel.textContent='休息 30 秒';start();});
+document.querySelectorAll('.time-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{loadTimer(+btn.dataset.time,btn.dataset.label,btn,btn.closest('.ex'));start();
+    document.querySelector('.timer-dock').scrollIntoView({block:'nearest',behavior:'smooth'});});
+});
+let ac=null;
+function beep(){try{ac=ac||new (window.AudioContext||window.webkitAudioContext)();if(ac.state==='suspended')ac.resume();
+  [0,.18,.36].forEach((t,i)=>{const o=ac.createOscillator(),g=ac.createGain();o.type='sine';o.frequency.value=i===2?880:660;
+    o.connect(g);g.connect(ac.destination);const s=ac.currentTime+t;g.gain.setValueAtTime(.0001,s);
+    g.gain.exponentialRampToValueAtTime(.35,s+.02);g.gain.exponentialRampToValueAtTime(.0001,s+.16);o.start(s);o.stop(s+.18);});
+}catch(e){}}
+
+/* ---------- 30 天計畫 ---------- */
+(function(){
+ const MODE={
+  std:{t:"標準",c:"t-core"},
+  hard:{t:"加強",c:"t-full"},
+  easy:{t:"輕鬆",c:"t-recovery"}
+ };
+ const MENU=["有氧","核心","手臂","收操"];
+ const MPAT=["std","std","hard","std","std","hard","easy"];
+ const WEEK=[
+  "第 1 週 · 建立節奏：核心／手臂各 1 輪，棒式 30 秒，有氧影片 1 遍。",
+  "第 2 週 · 上軌道：照頁面次數做，棒式 40 秒，有氧 1 遍。",
+  "第 3 週 · 加量：核心／手臂 2 輪，棒式 45 秒，有氧可多做 5–10 分。",
+  "第 4 週 · 挑戰：2 輪，棒式 50–60 秒，有氧盡量不中斷。"
+ ];
+ const days=[];
+ for(let i=1;i<=30;i++){
+   let mode=MPAT[(i-1)%7], title=null;
+   if(i===29){mode="hard";title="驗收日";}
+   if(i===30){mode="easy";title="完成！";}
+   days.push({n:i,mode,title,week:Math.min(3,Math.floor((i-1)/7))});
+ }
+ function load(){try{return JSON.parse(localStorage.getItem('wk30'))||{}}catch(e){return window.__wk30||{}}}
+ function save(s){try{localStorage.setItem('wk30',JSON.stringify(s))}catch(e){window.__wk30=s}}
+ let store=load(); if(!store.done)store.done=[];
+ const doneSet=new Set(store.done);
+ const todayISO=()=>{const d=new Date();return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();};
+ function dayNum(){
+   if(!store.start)return null;
+   const p=store.start.split('-').map(Number),s=new Date(p[0],p[1]-1,p[2]),t=new Date();
+   s.setHours(0,0,0,0);t.setHours(0,0,0,0);
+   return Math.floor((t-s)/86400000)+1;
+ }
+ const main=document.getElementById('phases');
+ const card=document.createElement('section'); card.className='plan';
+ main.insertBefore(card,main.firstChild);
+
+ function render(){
+   const tn=dayNum(),doneCount=doneSet.size,pct=Math.round(doneCount/30*100);
+   const startBtn=store.start
+     ?`<button class="reset-all" id="planReset">${tn>=1&&tn<=30?'進行到第 '+tn+' 天':(tn&&tn>30?'計畫已滿 30 天 🎉':'已排定起始日')} · 重設為今天</button>`
+     :`<button class="tc primary" id="planStart" style="--tt:var(--calm);align-self:flex-start">從今天開始 Day 1</button>`;
+   let grid='';
+   days.forEach(d=>{const M=MODE[d.mode];const cls=[M.c];if(doneSet.has(d.n))cls.push('done');if(tn===d.n)cls.push('today');
+     grid+=`<button class="day ${cls.join(' ')}" data-day="${d.n}"><span class="dn">${d.n}</span><span class="dl">${M.t}</span></button>`;});
+   card.innerHTML=`
+     <div class="phase-head"><div class="num" style="background:var(--calm)">30</div>
+       <div class="phase-titles"><div class="tag" style="color:var(--calm)">30-DAY PLAN</div><h2>30 天計畫</h2></div>
+       <div class="phase-meta">天天做<br>含輕鬆日</div></div>
+     <div class="phase-body" style="padding:4px 16px 18px">
+       <div class="plan-prog"><div class="progress-top"><span class="pct" style="color:var(--calm)">${pct}%</span>
+         <span class="count">${doneCount} / 30 天完成</span></div>
+         <div class="bar"><i style="width:${pct}%;background:var(--calm)"></i></div>${startBtn}</div>
+       <div class="grid">${grid}</div>
+       <div class="day-detail" id="dayDetail"></div>
+     </div>`;
+   wire();
+ }
+ function showDay(n){
+   const d=days[n-1],M=MODE[d.mode],det=document.getElementById('dayDetail');
+   const pills=MENU.map(m=>`<span class="pill">${m}</span>`).join('');
+   let note;
+   if(n===29)note="驗收日：核心和手臂各做 2 輪，感受一下比第 1 天輕鬆多少。";
+   else if(n===30)note="最後一天！輕鬆做完整套＋好好收操，給自己一個大大的讚。想繼續就從 Day 1 再來一輪。";
+   else if(d.mode==='easy')note="今天做輕鬆版：核心／手臂次數減半、慢慢來，當作恢復。天天動很好，也要讓肌肉喘口氣。";
+   else note=WEEK[d.week]+(d.mode==='hard'?" 今天加強：多做 1 輪、棒式多撐一點。":"");
+   const isDone=doneSet.has(n);
+   det.innerHTML=`
+     <div class="dd-top"><div><span class="dd-day">Day ${n}</span><span class="dd-title">${d.title||('全身 · '+M.t)}</span></div>
+       <button class="tc ${isDone?'':'primary'}" id="ddToggle" style="--tt:var(--calm)">${isDone?'取消完成':'完成第 '+n+' 天'}</button></div>
+     <div class="pills">${pills}</div>
+     <div class="dd-note">${note}</div>
+     <button class="reset-all" id="ddJump" style="margin-top:8px">↓ 跳到下面的動作</button>`;
+   det.classList.add('show');
+   document.getElementById('ddToggle').onclick=()=>{
+     doneSet.has(n)?doneSet.delete(n):doneSet.add(n);
+     store.done=[...doneSet];save(store);render();showDay(n);
+     card.querySelector('.day[data-day="'+n+'"]').classList.add('sel');
+   };
+   const jump=document.getElementById('ddJump');
+   if(jump)jump.onclick=()=>document.querySelector('.phase').scrollIntoView({behavior:'smooth',block:'start'});
+ }
+ function wire(){
+   card.querySelectorAll('.day').forEach(b=>b.onclick=()=>{
+     card.querySelectorAll('.day.sel').forEach(x=>x.classList.remove('sel'));
+     b.classList.add('sel');showDay(+b.dataset.day);
+   });
+   const ps=document.getElementById('planStart');
+   if(ps)ps.onclick=()=>{store.start=todayISO();save(store);render();const tn=dayNum();if(tn>=1&&tn<=30){showDay(tn);card.querySelector('.day[data-day="'+tn+'"]').classList.add('sel');}};
+   const pr=document.getElementById('planReset');
+   if(pr)pr.onclick=()=>{store.start=todayISO();save(store);render();const tn=dayNum();if(tn>=1&&tn<=30)showDay(tn);};
+ }
+ render();
+ const tn0=dayNum(); if(tn0>=1&&tn0<=30){showDay(tn0);card.querySelector('.day[data-day="'+tn0+'"]').classList.add('sel');}
+})();
+
+paint();
+</script>
+</body>
+</html>
